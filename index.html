@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ربط ملف الـ Manifest لتثبيت التطبيق على جميع الأجهزة -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffb300">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>قرآني | الأفضل في التاريخ</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Kufi+Arabic:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-emerald">
+
+    <div id="reading-progress" class="progress-bar"></div>
+
+    <nav class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <h2 id="menu-title">قُرْآنِي ✨</h2>
+            <button onclick="toggleMenu()" class="close-btn">&times;</button>
+        </div>
+        <div class="menu-body">
+            <div class="menu-item">
+                <label id="lbl-lang">اللغة</label>
+                <select id="lang-select" onchange="changeLanguage(this.value)">
+                    <option value="ar">العربية</option>
+                    <option value="ckb">سۆرانی (الكردية السورانية)</option>
+                    <option value="pnb">بادینی (الكردية البادينية)</option>
+                </select>
+            </div>
+            <div class="menu-item">
+                <label id="lbl-theme">المظهر</label>
+                <select id="theme-select" onchange="changeTheme(this.value)">
+                    <option value="theme-emerald">الزمرد الإسلامي</option>
+                    <option value="theme-dark">شبه جزيرة الليل</option>
+                    <option value="theme-paper">المخطوطات القديمة</option>
+                </select>
+            </div>
+            
+            <div class="menu-item">
+                <label id="lbl-font-size">حجم الخط</label>
+                <div class="font-controls">
+                    <button onclick="adjustFont(2)">+</button>
+                    <button onclick="adjustFont(-2)">-</button>
+                </div>
+            </div>
+
+            <div class="stats-box">
+                <h4 id="lbl-stats">إحصائيات وردك اليومي</h4>
+                <div class="stats-grid">
+                    <div><span id="stat-minutes">0</span> <p id="lbl-min">دقيقة استماع</p></div>
+                    <div><span id="stat-ayahs">0</span> <p id="lbl-ayahs-count">آية مقروءة</p></div>
+                </div>
+            </div>
+
+            <button id="installApp" class="install-btn">تثبيت المنصة كتطبيق</button>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <header class="glass-header">
+            <button class="menu-trigger" onclick="toggleMenu()">☰</button>
+            <h1 id="top-logo">قُرْآنِي</h1>
+            
+            <div class="header-selectors">
+                <select id="reciter-select"></select>
+                <select id="surah-select"></select>
+            </div>
+        </header>
+
+        <div class="search-section">
+            <input type="text" id="search-input" placeholder="ابحث عن آية، كلمة، أو تفسير..." oninput="searchQuran(this.value)">
+            <div id="search-results" class="search-results-box hidden"></div>
+        </div>
+
+        <main class="content-container">
+            <section class="player-card">
+                <h3 id="player-hd">غرفة التحكم الصوتي</h3>
+                <div id="track-info" class="track-info-box">قم باختيار قارئ وسورة للبدء</div>
+                
+                <audio id="audio-player" controls></audio>
+                
+                <div class="player-extra-controls">
+                    <a id="download-btn" class="download-btn" href="#" target="_blank" download>تحميل السورة 📥</a>
+                    
+                    <label class="continuous-label">
+                        <input type="checkbox" id="continuous-play" checked> <span id="lbl-continuous">التشغيل المستمر</span>
+                    </label>
+                    <select id="playback-speed" onchange="changeSpeed(this.value)">
+                        <option value="1">1.0x (طبيعي)</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                    </select>
+                </div>
+            </section>
+
+            <section id="quran-text-container" class="quran-display">
+                <!-- الآيات تظهر هنا ديناميكياً -->
+            </section>
+        </main>
+    </div>
+
+    <!-- ملفات الجافا سكريبت الخاصة بالموقع -->
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+
+    <!-- كود تفعيل الـ Service Worker للتثبيت كبرنامج لجميع الأجهزة -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('تم تسجيل نظام التثبيت بنجاح!', reg))
+                .catch(err => console.log('فشل تسجيل نظام التثبيت:', err));
+            });
+        }
+    </script>
+</body>
+</html>

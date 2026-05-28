@@ -1,0 +1,287 @@
+/* ==========================================
+   التحفة البصرية والمتغيرات الملكية (2026)
+   ========================================== */
+:root {
+    --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    --font-arabic: 'Amiri', serif;
+    --font-ui: 'Noto Kufi Arabic', sans-serif;
+    --base-font-size: 2rem;
+    --radius-lg: 24px;
+    --radius-md: 14px;
+    --glow-gold: 0 0 25px rgba(212, 175, 55, 0.4);
+}
+
+.theme-emerald {
+    --bg: #040d0a; 
+    --card: rgba(13, 29, 23, 0.85);
+    --card-hover: rgba(19, 43, 34, 0.95);
+    --text: #e6f4f1; 
+    --text-muted: #8ea39e;
+    --gold: #ffd700; 
+    --accent: #00e676; 
+    --highlight: rgba(212, 175, 55, 0.15);
+    --input-bg: #091a14;
+    --select-option-bg: #0d211a;
+}
+
+.theme-dark {
+    --bg: #070709; 
+    --card: rgba(18, 18, 24, 0.85);
+    --card-hover: rgba(26, 26, 36, 0.95);
+    --text: #f4f4f7; 
+    --text-muted: #a0a0b0;
+    --gold: #ffb300; 
+    --accent: #2979ff; 
+    --highlight: rgba(41, 121, 255, 0.15);
+    --input-bg: #121218;
+    --select-option-bg: #1a1a24;
+}
+
+.theme-paper {
+    --bg: #f5eedc; 
+    --card: rgba(253, 246, 227, 0.95);
+    --card-hover: rgba(247, 236, 211, 1);
+    --text: #3c4f54; 
+    --text-muted: #72858a;
+    --gold: #b58900; 
+    --accent: #d32f2f; 
+    --highlight: rgba(181, 137, 0, 0.12);
+    --input-bg: #fffbf2;
+    --select-option-bg: #fdf6e3;
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    background: var(--bg); 
+    color: var(--text); 
+    font-family: var(--font-ui);
+    transition: var(--transition); 
+    overflow-x: hidden;
+    line-height: 1.8;
+}
+
+.progress-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--gold));
+    box-shadow: 0 0 12px var(--accent);
+    width: 0%; z-index: 1000; transition: width 0.1s linear;
+}
+
+/* الهيدر المحسن بالكامل */
+.glass-header {
+    background: var(--card); 
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    padding: 15px 4%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    position: sticky; top: 0; z-index: 500; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 20px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.menu-trigger {
+    background: none; border: none; color: var(--text); font-size: 1.8rem; cursor: pointer;
+    transition: var(--transition); display: flex; align-items: center;
+}
+.menu-trigger:hover { color: var(--gold); transform: scale(1.05); }
+
+#top-logo { 
+    font-family: var(--font-arabic); 
+    color: var(--gold); 
+    font-size: 2.2rem; 
+    text-shadow: var(--glow-gold);
+    font-weight: 700;
+}
+
+.header-selectors { 
+    display: flex; 
+    gap: 15px; 
+    flex-grow: 1; 
+    max-width: 600px; 
+}
+
+select, input[type="text"] {
+    background: var(--input-bg); 
+    color: var(--text);
+    border: 1.5px solid rgba(255, 255, 255, 0.08); 
+    padding: 12px 20px;
+    border-radius: var(--radius-md); 
+    font-size: 0.95rem; 
+    font-weight: 600;
+    width: 100%; 
+    outline: none;
+    transition: var(--transition); 
+    font-family: var(--font-ui);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+select option {
+    background-color: var(--select-option-bg);
+    color: var(--text);
+    padding: 12px;
+}
+
+.content-container { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 30px 20px; 
+}
+
+/* ==========================================
+   المشغل الانسيابي المستقر (دون تداخل أو قبح)
+   ========================================== */
+.player-card {
+    background: var(--card); 
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 30px; 
+    border-radius: var(--radius-lg); 
+    text-align: center; 
+    margin-bottom: 35px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3); 
+    position: relative; /* تدفق طبيعي لمنع المشاكل العائمة */
+    width: 100%;
+}
+
+.player-card h3 { 
+    font-size: 0.9rem; 
+    color: var(--text-muted); 
+    letter-spacing: 1px; 
+    margin-bottom: 5px;
+}
+
+.track-info-box {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 10px auto 20px;
+    max-width: 75%;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+audio { 
+    width: 100%; 
+    margin-bottom: 15px;
+    accent-color: var(--accent);
+}
+
+.player-extra-controls { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    flex-wrap: wrap; 
+    gap: 15px; 
+    padding-top: 15px; 
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.player-extra-controls select { width: auto; padding: 8px 15px; }
+
+.continuous-label { 
+    display: flex;  align-items: center;  gap: 8px; 
+    cursor: pointer; font-weight: 600; color: var(--text-muted);
+}
+
+.download-btn {
+    background: linear-gradient(135deg, var(--accent), #00b0ff);
+    color: #fff; text-decoration: none; padding: 10px 18px;
+    border-radius: var(--radius-md); font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0, 230, 118, 0.2); transition: var(--transition);
+}
+.download-btn:hover { background: var(--gold); color: #000; }
+
+/* قسم عرض الآيات */
+.quran-display { display: flex; flex-direction: column; gap: 25px; width: 100%; }
+.ayah-block { 
+    padding: 30px; border-radius: var(--radius-lg); 
+    background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); 
+    transition: var(--transition); cursor: pointer;
+}
+.ayah-block.active-ayah { 
+    background: var(--highlight); border-color: var(--gold); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: scale(1.01);
+}
+
+.ayah-arabic { font-family: var(--font-arabic); font-size: var(--base-font-size); text-align: right; line-height: 2.2; color: #ffffff; }
+.theme-paper .ayah-arabic { color: #1a252f; }
+.ayah-num-mark { color: var(--gold); margin-left: 10px; font-weight: 700; }
+.ayah-translation { font-size: calc(var(--base-font-size) * 0.5); color: var(--text-muted); margin-top: 15px; text-align: right; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 15px; }
+
+/* القائمة الجانبية المحدثة لملء الشاشة في الموبايل */
+.side-menu {
+    position: fixed; top: 0; right: -100%; width: 360px; height: 100%;
+    background: var(--card); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 2000;
+    transition: var(--transition); padding: 30px; box-shadow: -15px 0 40px rgba(0,0,0,0.4);
+    display: flex; flex-direction: column; overflow-y: auto;
+}
+.side-menu.active { right: 0; }
+.menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.menu-header h2 { color: var(--gold); font-family: var(--font-arabic); font-size: 2rem; }
+.close-btn { background: none; border: none; color: var(--text); font-size: 2.2rem; cursor: pointer; }
+.menu-item { margin-bottom: 25px; display: flex; flex-direction: column; gap: 10px; }
+.menu-item label { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); }
+
+.font-controls { display: flex; gap: 8px; }
+.font-controls button { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: var(--text); padding: 10px; font-size: 1.2rem; border-radius: var(--radius-md); cursor: pointer; }
+.stats-box { background: rgba(0,0,0,0.2); padding: 20px; border-radius: var(--radius-md); margin-top: auto; }
+.stats-grid { display: flex; justify-content: space-around; text-align: center; }
+.stats-grid span { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+.install-btn { background: var(--gold); color: #000; border: none; padding: 14px; border-radius: var(--radius-md); font-weight: 700; cursor: pointer; margin-top: 20px; }
+.hidden { display: none !important; }
+
+/* ==========================================
+   التجاوب التام والخيالي للهواتف والشاشات الصغيرة
+   ========================================== */
+@media (max-width: 768px) {
+    .header-selectors { display: none; }
+    .side-menu .menu-item { display: flex; } 
+    .glass-header { padding: 12px 15px; }
+    #top-logo { font-size: 1.6rem; }
+    
+    :root { 
+        --base-font-size: 1.45rem; 
+        --radius-lg: 16px;
+        --radius-md: 10px;
+    }
+    
+    .content-container { padding: 15px 10px; }
+    
+    .player-card { 
+        padding: 20px 15px; 
+        margin-bottom: 20px;
+    }
+    
+    .track-info-box { 
+        max-width: 100%; 
+        font-size: 1rem; 
+        padding: 8px; 
+    }
+    
+    .player-extra-controls { 
+        flex-direction: column; 
+        align-items: stretch; 
+        gap: 10px; 
+    }
+    
+    .player-extra-controls select, .download-btn { 
+        width: 100%; 
+        text-align: center;
+        padding: 12px;
+    }
+    
+    .continuous-label { justify-content: center; }
+    .ayah-block { padding: 20px 15px; }
+    .side-menu { width: 100%; right: -100%; padding: 20px; }
+}
