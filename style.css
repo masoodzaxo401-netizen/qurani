@@ -137,7 +137,7 @@ select option {
 }
 
 /* ==========================================
-   المشغل الانسيابي المستقر (دون تداخل أو قبح)
+   المشغل الانسيابي المستقر (دون تداخل)
    ========================================== */
 .player-card {
     background: var(--card); 
@@ -147,7 +147,7 @@ select option {
     text-align: center; 
     margin-bottom: 35px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.3); 
-    position: relative; /* تدفق طبيعي لمنع المشاكل العائمة */
+    position: relative; 
     width: 100%;
 }
 
@@ -219,7 +219,7 @@ audio {
 .ayah-num-mark { color: var(--gold); margin-left: 10px; font-weight: 700; }
 .ayah-translation { font-size: calc(var(--base-font-size) * 0.5); color: var(--text-muted); margin-top: 15px; text-align: right; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 15px; }
 
-/* القائمة الجانبية المحدثة لملء الشاشة في الموبايل */
+/* القائمة الجانبية المحسنة */
 .side-menu {
     position: fixed; top: 0; right: -100%; width: 360px; height: 100%;
     background: var(--card); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 2000;
@@ -245,10 +245,34 @@ audio {
    التجاوب التام والخيالي للهواتف والشاشات الصغيرة
    ========================================== */
 @media (max-width: 768px) {
-    .header-selectors { display: none; }
-    .side-menu .menu-item { display: flex; } 
-    .glass-header { padding: 12px 15px; }
-    #top-logo { font-size: 1.6rem; }
+    /* إظهار القوائم في الهيدر بشكل مرن ومصغر بدلاً من إخفائها */
+    .header-selectors { 
+        display: flex; 
+        gap: 8px; 
+        flex-grow: 1;
+        max-width: 65%;
+    }
+
+    /* حقول اختيار مرنة ومناسبة للموبايل لمنع التداخل */
+    select, input[type="text"] {
+        padding: 8px 10px;
+        font-size: 0.82rem;
+        border-radius: var(--radius-md);
+    }
+
+    .glass-header { 
+        padding: 10px 12px; 
+        gap: 8px;
+    }
+
+    #top-logo { 
+        font-size: 1.35rem; 
+        white-space: nowrap; 
+    }
+    
+    .menu-trigger {
+        font-size: 1.5rem;
+    }
     
     :root { 
         --base-font-size: 1.45rem; 
@@ -283,5 +307,11 @@ audio {
     
     .continuous-label { justify-content: center; }
     .ayah-block { padding: 20px 15px; }
-    .side-menu { width: 100%; right: -100%; padding: 20px; }
+    
+    /* قائمة جانبية تغطي كامل الشاشة للموبايل لتسهيل التصفح */
+    .side-menu { 
+        width: 100%; 
+        right: -100%; 
+        padding: 24px; 
+    }
 }
